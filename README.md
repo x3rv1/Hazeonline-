@@ -22,4 +22,7 @@ target_metadata = Base.metadata
 
 ## Handling migrations usiing alembic
 -to generate migration file we run `alembic revision --autogenerate -m "the message"`
--To apply the migration, we run `alembic upgrade head` 
+-To apply the migration, we run `alembic upgrade head`  
+
+
+-to start Backend use command ```fastapi dev app.py``` 
