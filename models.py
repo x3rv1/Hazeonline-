@@ -2,61 +2,73 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, Text, DateTime, Float, ForeignKey
 from sqlalchemy.orm import declarative_base, relationship
 
+# Base class for all models
 Base = declarative_base()
+
+
+# CATEGORY MODEL
 
 class Category(Base):
     __tablename__ = "categories"
 
     id = Column(Integer, primary_key=True)
-    name = Column(Text, nullable=False, unique=True)
-    description = Column(Text)
-    created_at = Column(DateTime, default=datetime.now)
+    name = Column(Text, nullable=False, unique=True)   # Category name (e.g. "Anime Apparel")
+    description = Column(Text)                         # Optional description of the category
+    created_at = Column(DateTime, default=datetime.now) # Timestamp when category was created
 
-    # Relationship to Product
+    # Relationship: One category can have many products
     products = relationship("Product", back_populates="category")
 
+
+
+# PRODUCT MODEL
 
 class Product(Base):
     __tablename__ = "products"
 
     id = Column(Integer, primary_key=True)
-    name = Column(Text, nullable=False, unique=True)
-    description = Column(Text)
-    price = Column(Float, nullable=False)
-    stock = Column(Integer, default=0)
-    created_at = Column(DateTime, default=datetime.now)
+    name = Column(Text, nullable=False, unique=True)   # Product name
+    description = Column(Text)                         # Product description
+    price = Column(Float, nullable=False)              # Product price
+    stock = Column(Integer, default=0)                 # Available stock count
+    image_url = Column(Text)                           # ✅ Optional: link to product image
+    created_at = Column(DateTime, default=datetime.now) # Timestamp when product was created
 
-    # Foreign key to Category
+    # Foreign key: Product belongs to a category
     category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
 
-    # Relationship back to Category
-    category = relationship("Category", back_populates="products")
-
-    # Relationship to OrderItems
-    order_items = relationship("OrderItem", back_populates="product")
+    # Relationships
+    category = relationship("Category", back_populates="products") # Link back to category
+    order_items = relationship("OrderItem", back_populates="product") # Link to order items
 
 
-class Order(Base): #Order: Represents a customer’s purchase, with fields for customer_name, created_at, and status.
+
+# ORDER MODEL
+
+class Order(Base):
     __tablename__ = "orders"
 
     id = Column(Integer, primary_key=True)
-    customer_name = Column(Text, nullable=False)
-    created_at = Column(DateTime, default=datetime.now)
-    status = Column(Text, default="pending")
+    customer_name = Column(Text, nullable=False)       # Name of the customer placing the order
+    created_at = Column(DateTime, default=datetime.now) # Timestamp when order was created
+    status = Column(Text, default="pending")           # Order status (pending, shipped, etc.)
 
-    # Relationship to OrderItems
+    # Relationship: One order can have many order items
     order_items = relationship("OrderItem", back_populates="order")
 
 
-class OrderItem(Base): #OrderItem: Association table linking Order and Product. It stores quantity and price_at_purchase so you can track what was bought and at what price.
+
+# ORDER ITEM MODEL
+
+class OrderItem(Base):
     __tablename__ = "order_items"
 
     id = Column(Integer, primary_key=True)
-    order_id = Column(Integer, ForeignKey("orders.id"), nullable=False)
-    product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
-    quantity = Column(Integer, default=1)
-    price_at_purchase = Column(Float, nullable=False)
+    order_id = Column(Integer, ForeignKey("orders.id"), nullable=False)   # Link to order
+    product_id = Column(Integer, ForeignKey("products.id"), nullable=False) # Link to product
+    quantity = Column(Integer, default=1)              # How many of this product were bought
+    price_at_purchase = Column(Float, nullable=False)  # Product price at time of purchase
 
     # Relationships back to Order and Product
-    order = relationship("Order", back_populates="order_items")
-    product = relationship("Product", back_populates="order_items") 
+    order = relationship("Order", back_populates="order_items")   # Link back to order
+    product = relationship("Product", back_populates="order_items") # Link back to product
