@@ -13,6 +13,10 @@
 4. update the alembic ini file and set the sqlalchemy to whatever the data base should be  ie;sqlite:///haze_online.db
 5. Create the two necesarry python files
 6. After setting up atleast one model, we need to modify the env.py inside the migration folder and update thr targe_metadata
+```py
+from models import Base
+target_metadata = Base.metadata 
+```
 7. to start backend use ```fast api dev app.py```
 
 
