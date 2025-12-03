@@ -5,8 +5,8 @@ name = "pypi"
 
 [packages]
 sqlalchemy = "*"
-alembic = "*"
 fastapi = {extras = ["standard"], version = "*"}
+alembic = "*"
 
 [dev-packages]
 
