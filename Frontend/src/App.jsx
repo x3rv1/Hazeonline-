@@ -1,0 +1,10 @@
+import Home from "./pages/Home.jsx";
+import CategoriesPage from "./pages/CategoriesPage.jsx";
+import ProductsPage from "./pages/ProductsPage.jsx";
+import CartPage from "./pages/CartPage.jsx";
+import { Button } from "./components/ui/button.jsx";
+import Home from "./pages/Home.jsx";
+import CategoriesPage from "./pages/CategoriesPage.jsx";
+import ProductsPage from "./pages/ProductsPage.jsx";
+import CartPage from "./pages/CartPage.jsx";
+import { Button } from "./components/ui/button.jsx";
