@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { apiPost } from "../api/client.js";
-import { Card, CardHeader, CardTitle } from "./ui/card.jsx";
-import { Button } from "./ui/button.jsx";
-import { Input, Label } from "./ui/input.jsx";
+// import { Card, CardHeader, CardTitle } from "./ui/card.jsx";
+// import { Button } from "./ui/button.jsx";
+// import { Input, Label } from "./ui/input.jsx";
 import { Plus } from "lucide-react";
 
 function CategoryForm({ onCategoryCreated }) {
@@ -39,35 +39,37 @@ function CategoryForm({ onCategoryCreated }) {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+      <div className="mb-4">
+        <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
           <Plus className="text-purple-600" />
           Add New Category
-        </CardTitle>
-      </CardHeader>
+        </h3>
+      </div>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <Label htmlFor="name">Category Name *</Label>
-          <Input
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors duration-300">Category Name *</label>
+          <input
             id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
             placeholder="e.g., Electronics, Clothing"
             required
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-300 transition-colors duration-300"
           />
         </div>
 
         <div>
-          <Label htmlFor="description">Description</Label>
-          <Input
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors duration-300">Description</label>
+          <input
             id="description"
             name="description"
             value={formData.description}
             onChange={handleChange}
             placeholder="Category description (optional)"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-300 transition-colors duration-300"
           />
         </div>
 
@@ -79,11 +81,11 @@ function CategoryForm({ onCategoryCreated }) {
           </div>
         )}
 
-        <Button type="submit" disabled={loading} className="w-full">
+        <button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
           {loading ? "Creating..." : "Create Category"}
-        </Button>
+        </button>
       </form>
-    </Card>
+    </div>
   );
 }
 

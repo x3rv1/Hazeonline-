@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { apiGet, apiDelete } from "../api/client.js";
-import { Card } from "./ui/card.jsx";
-import { Button } from "./ui/button.jsx";
+// import { Card } from "./ui/card.jsx";
+// import { Button } from "./ui/button.jsx";
 import { Grid, Trash2, AlertCircle } from "lucide-react";
 
 function CategoryList() {
@@ -40,10 +40,10 @@ function CategoryList() {
 
   if (categories.length === 0) {
     return (
-      <Card className="text-center py-8">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 text-center py-8">
         <AlertCircle className="mx-auto h-12 w-12 text-gray-400 mb-4" />
         <p className="text-gray-500">No categories yet. Add your first category!</p>
-      </Card>
+      </div>
     );
   }
 
@@ -56,7 +56,7 @@ function CategoryList() {
       
       <div className="grid gap-4">
         {categories.map((category) => (
-          <Card key={category.id} className="hover:shadow-lg transition-shadow">
+          <div key={category.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 hover:shadow-lg">
             <div className="flex justify-between items-start">
               <div className="flex-1">
                 <h3 className="font-semibold text-lg">{category.name}</h3>
@@ -65,15 +65,14 @@ function CategoryList() {
                 </p>
               </div>
               
-              <Button
-                variant="danger"
+              <button
                 onClick={() => handleDelete(category.id)}
-                className="flex items-center gap-1"
+                className="bg-red-100 hover:bg-red-200 text-red-600 font-medium p-2 rounded"
               >
                 <Trash2 size={16} />
-              </Button>
+              </button>
             </div>
-          </Card>
+          </div>
         ))}
       </div>
     </div>

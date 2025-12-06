@@ -3,10 +3,12 @@ Haze Online - FastAPI Backend
 
 A simple e-commerce API with categories, products, and orders.
 """
+# Import necessary libraries
 from fastapi import FastAPI, Form, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
+# Import our database models and connection
 from models import Product, Category, Order, OrderItem
 from database import get_db
 
@@ -20,7 +22,7 @@ app = FastAPI(
 # Add CORS middleware for frontend communication
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=["*"], # Allow all origins (for development/demo)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -111,13 +113,13 @@ def delete_category(category_id: int, db: Session = Depends(get_db)):
 
 @app.post("/products")
 def create_product(
-    name: str = Form(...),
-    price: float = Form(...),
-    category_id: int = Form(...),
-    description: str = Form(None),
-    stock: int = Form(0),
-    image_url: str = Form(None),
-    db: Session = Depends(get_db)
+    name: str = Form(...),          # Product name from form data
+    price: float = Form(...),       # Product price (must be a number)
+    category_id: int = Form(...),   # Which category this product belongs to
+    description: str = Form(None),  # Optional description
+    stock: int = Form(0),           # Stock quantity (default is 0)
+    image_url: str = Form(None),    # URL for the product image
+    db: Session = Depends(get_db)   # Database session dependency
 ):
     """Create a new product."""
     # Check if category exists
