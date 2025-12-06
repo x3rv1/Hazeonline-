@@ -44,16 +44,17 @@ Hazeonline-/
 ##  Getting Started
 
 ### Prerequisites
-- Python 3.8+
-- Node.js 18+
-- pipenv (for backend)
+- Python(Backend)
+- React (Frontend)
+  
+  
 
 ### Backend Setup
 
 ```bash
 cd Backend
 pipenv install
-pipenv run uvicorn app:app --reload
+pipenv run uvicorn app: app --reload
 ```
 
 The API will be available at `http://localhost:8000`
@@ -117,4 +118,4 @@ The frontend will be available at `http://localhost:5173`
 
 ## License
 
-This project is for educational purposes.
+This project is for my Phase 3.
