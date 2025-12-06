@@ -1,8 +1,8 @@
-# 🛍️ Haze Online - E-commerce Shop
+#  Haze Online - E-commerce Shop
 
 A modern full-stack e-commerce web application built with **React** (Frontend) and **FastAPI** (Backend).
 
-## 📋 Project Overview
+##  Project Overview
 
 Haze Online is a simple yet functional online shop that allows users to:
 - Browse product categories
@@ -10,7 +10,7 @@ Haze Online is a simple yet functional online shop that allows users to:
 - Add items to a shopping cart
 - Place orders
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 Hazeonline-/
@@ -27,7 +27,7 @@ Hazeonline-/
         └── api/       # API client
 ```
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Backend
 - **FastAPI** - Modern Python web framework
@@ -41,7 +41,7 @@ Hazeonline-/
 - **React Router** - Client-side routing
 - **Tailwind CSS** - Utility-first styling
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Python 3.8+
@@ -68,7 +68,7 @@ npm run dev
 
 The frontend will be available at `http://localhost:5173`
 
-## 📡 API Endpoints
+##  API Endpoints
 
 ### Categories
 | Method | Endpoint | Description |
@@ -105,19 +105,16 @@ The frontend will be available at `http://localhost:5173`
 | POST | `/order_items` | Add item to order |
 | GET | `/order_items/{id}` | Get single order item |
 
-## 📖 User Stories
+## User Stories
 
-- ✅ **Browse Categories** - Users can view all product categories
-- ✅ **View Products** - Users can see all available products
-- ✅ **Product Details** - Users can view individual product information
-- ✅ **Shopping Cart** - Users can add products to cart
-- ✅ **Place Orders** - Users can checkout and create orders
-- ✅ **Order Management** - View and track order status
+-  **Browse Categories** - Users can view all product categories
+-  **View Products** - Users can see all available products
+-  **Product Details** - Users can view individual product information
+-  **Shopping Cart** - Users can add products to cart
+-  **Place Orders** - Users can checkout and create orders
+-  **Order Management** - View and track order status
 
-## 👥 Team
 
-School Project - Haze Online E-commerce
-
-## 📝 License
+## License
 
 This project is for educational purposes.
