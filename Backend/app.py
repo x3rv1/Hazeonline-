@@ -4,6 +4,7 @@ Haze Online - FastAPI Backend
 A simple e-commerce API with categories, products, and orders.
 """
 from fastapi import FastAPI, Form, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from models import Product, Category, Order, OrderItem
@@ -14,6 +15,15 @@ app = FastAPI(
     title="Haze Online API",
     description="Backend API for Haze Online e-commerce store",
     version="1.0.0"
+)
+
+# Add CORS middleware for frontend communication
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
