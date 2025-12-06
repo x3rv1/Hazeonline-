@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Card } from "../components/ui/card.jsx";
-import { Button } from "../components/ui/button.jsx";
+// Removed imports for separate components to keep it simple
+// import { Card } from "../components/ui/card.jsx";
+// import { Button } from "../components/ui/button.jsx";
 import { apiGet } from "../api/client.js";
 import { ShoppingBag, Grid, Package, ArrowRight, Sparkles } from "lucide-react";
 
@@ -33,41 +34,41 @@ function Home() {
         </p>
         <div className="flex justify-center gap-4 flex-wrap">
           <Link to="/categories">
-            <Button variant="outline" className="border-white text-white hover:bg-white/20 flex items-center gap-2">
+            <button className="px-4 py-2 rounded-lg border border-white text-white hover:bg-white/20 flex items-center gap-2">
               <Grid size={18} /> Browse Categories
-            </Button>
+            </button>
           </Link>
           <Link to="/products">
-            <Button variant="outline" className="border-white text-white hover:bg-white/20 flex items-center gap-2">
+            <button className="px-4 py-2 rounded-lg border border-white text-white hover:bg-white/20 flex items-center gap-2">
               <Package size={18} /> View Products
-            </Button>
+            </button>
           </Link>
           <Link to="/cart">
-            <Button variant="outline" className="border-white text-white hover:bg-white/20 flex items-center gap-2">
+            <button className="px-4 py-2 rounded-lg border border-white text-white hover:bg-white/20 flex items-center gap-2">
               <ShoppingBag size={18} /> Go to Cart
-            </Button>
+            </button>
           </Link>
         </div>
       </div>
 
       {/* Stats Section */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 text-center">
           <p className="text-3xl font-bold text-blue-600">{newProducts.length}</p>
           <p className="text-gray-600">Products</p>
-        </Card>
-        <Card className="text-center">
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 text-center">
           <p className="text-3xl font-bold text-purple-600">{categories.length}</p>
           <p className="text-gray-600">Categories</p>
-        </Card>
-        <Card className="text-center">
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 text-center">
           <p className="text-3xl font-bold text-green-600">24/7</p>
           <p className="text-gray-600">Available</p>
-        </Card>
-        <Card className="text-center">
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 text-center">
           <p className="text-3xl font-bold text-orange-600">Fast</p>
           <p className="text-gray-600">Delivery</p>
-        </Card>
+        </div>
       </div>
 
       {/* Categories Preview */}
@@ -84,10 +85,10 @@ function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {categories.slice(0, 4).map((cat) => (
               <Link key={cat.id} to={`/categories/${cat.id}`}>
-                <Card className="text-center hover:shadow-lg transition-shadow cursor-pointer h-full">
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 text-center hover:shadow-lg cursor-pointer h-full">
                   <h3 className="font-semibold text-lg">{cat.name}</h3>
                   <p className="text-gray-600 text-sm mt-1">{cat.description || "Browse products"}</p>
-                </Card>
+                </div>
               </Link>
             ))}
           </div>
@@ -110,16 +111,16 @@ function Home() {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
           </div>
         ) : newProducts.length === 0 ? (
-          <Card className="text-center py-8">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 text-center py-8">
             <p className="text-gray-500">No products yet. Add some products to get started!</p>
             <Link to="/products">
-              <Button className="mt-4">Add Products</Button>
+              <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors mt-4">Add Products</button>
             </Link>
-          </Card>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {newProducts.map((product) => (
-              <Card key={product.id} className="hover:shadow-lg transition-shadow">
+              <div key={product.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 hover:shadow-lg">
                 <div className="aspect-video bg-gray-100 rounded-lg mb-4 overflow-hidden flex items-center justify-center">
                   {product.image_url ? (
                     <img
@@ -153,7 +154,7 @@ function Home() {
                     {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
                   </span>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         )}

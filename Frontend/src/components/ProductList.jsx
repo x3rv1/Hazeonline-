@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { apiGet, apiDelete } from "../api/client.js";
-import { Card } from "./ui/card.jsx";
-import { Button } from "./ui/button.jsx";
+// import { Card } from "./ui/card.jsx";
+// import { Button } from "./ui/button.jsx";
 import { Package, Trash2, ShoppingCart, AlertCircle } from "lucide-react";
 
 function ProductList({ categoryId, onAddToCart }) {
@@ -41,10 +41,10 @@ function ProductList({ categoryId, onAddToCart }) {
 
   if (products.length === 0) {
     return (
-      <Card className="text-center py-8">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 text-center py-8">
         <AlertCircle className="mx-auto h-12 w-12 text-gray-400 mb-4" />
         <p className="text-gray-500">No products yet. Add your first product!</p>
-      </Card>
+      </div>
     );
   }
 
@@ -57,7 +57,7 @@ function ProductList({ categoryId, onAddToCart }) {
       
       <div className="grid gap-4">
         {products.map((product) => (
-          <Card key={product.id} className="hover:shadow-lg transition-shadow">
+          <div key={product.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 hover:shadow-lg">
             <div className="flex justify-between items-start gap-4">
               {/* Product Image */}
               {product.image_url ? (
@@ -92,25 +92,23 @@ function ProductList({ categoryId, onAddToCart }) {
               
               <div className="flex gap-2">
                 {onAddToCart && product.stock > 0 && (
-                  <Button
-                    variant="success"
+                  <button
                     onClick={() => onAddToCart(product)}
-                    className="flex items-center gap-1"
+                    className="bg-green-600 hover:bg-green-700 text-white font-medium py-1 px-3 rounded text-sm flex items-center gap-1"
                   >
                     <ShoppingCart size={16} />
                     Add
-                  </Button>
+                  </button>
                 )}
-                <Button
-                  variant="danger"
+                <button
                   onClick={() => handleDelete(product.id)}
-                  className="flex items-center gap-1"
+                  className="bg-red-100 hover:bg-red-200 text-red-600 font-medium p-2 rounded"
                 >
                   <Trash2 size={16} />
-                </Button>
+                </button>
               </div>
             </div>
-          </Card>
+          </div>
         ))}
       </div>
     </div>
