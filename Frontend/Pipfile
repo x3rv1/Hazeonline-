@@ -4,11 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-alembic = "*"
-uvicorn = "*"
-fastapi = "*"
-sqlalchemy = "*"
-python-multipart = "*"
 
 [dev-packages]
 

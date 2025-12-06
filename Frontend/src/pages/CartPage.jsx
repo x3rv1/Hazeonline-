@@ -2,7 +2,11 @@ import React from "react";
 import Cart from "../components/Cart.jsx";
 
 function CartPage() {
-  return <Cart />;
+  return (
+    <div className="space-y-6">
+      <Cart />
+    </div>
+  );
 }
 
 export default CartPage;
