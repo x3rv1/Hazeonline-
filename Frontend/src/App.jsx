@@ -3,6 +3,7 @@ import Home from "./pages/Home.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
 import CategoryProductsPage from "./pages/CategoryProductsPage.jsx";
+import ProductDetailsPage from "./pages/ProductDetailsPage.jsx";
 import CartPage from "./pages/CartPage.jsx";
 import Navbar from "./components/Navbar.jsx";
 
@@ -16,7 +17,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/categories" element={<CategoriesPage />} />
             <Route path="/categories/:id" element={<CategoryProductsPage />} />
+            <Route path="/categories/:id" element={<CategoryProductsPage />} />
             <Route path="/products" element={<ProductsPage />} />
+            <Route path="/products/:id" element={<ProductDetailsPage />} />
             <Route path="/cart" element={<CartPage />} />
           </Routes>
         </main>

@@ -13,6 +13,7 @@ from models import Product, Category, Order, OrderItem
 from database import get_db
 
 # Create the FastAPI app
+# 'title' and 'description' help document your API when you visit /docs
 app = FastAPI(
     title="Haze Online API",
     description="Backend API for Haze Online e-commerce store",
@@ -29,19 +30,16 @@ app.add_middleware(
 )
 
 
-# ============================================
 # HOME ROUTE
-# ============================================
 
 @app.get("/")
 def home():
     """Health check endpoint."""
+    print("Someone visited the home page!") # Debug print
     return {"message": "Welcome to Haze Online API"}
 
 
-# ============================================
 # CATEGORY ROUTES
-# ============================================
 
 @app.post("/categories")
 def create_category(
@@ -50,10 +48,14 @@ def create_category(
     db: Session = Depends(get_db)
 ):
     """Create a new category."""
+    print(f"Attempting to create category: {name}") # Debug print
+    
     new_category = Category(name=name, description=description)
     db.add(new_category)
     db.commit()
     db.refresh(new_category)
+    
+    print(f"Category created successfully with ID: {new_category.id}") # Debug print
     return {"message": "Category created", "category_id": new_category.id}
 
 
@@ -107,9 +109,8 @@ def delete_category(category_id: int, db: Session = Depends(get_db)):
     return {"message": "Category deleted"}
 
 
-# ============================================
 # PRODUCT ROUTES
-# ============================================
+
 
 @app.post("/products")
 def create_product(
@@ -138,6 +139,8 @@ def create_product(
     db.add(new_product)
     db.commit()
     db.refresh(new_product)
+    
+    print(f"Product created: {name} (${price})") # Debug print
     return {"message": "Product created", "product_id": new_product.id}
 
 
@@ -206,9 +209,7 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
     return {"message": "Product deleted"}
 
 
-# ============================================
 # ORDER ROUTES
-# ============================================
 
 @app.post("/orders")
 def create_order(
@@ -220,6 +221,8 @@ def create_order(
     db.add(new_order)
     db.commit()
     db.refresh(new_order)
+    
+    print(f"New order placed by: {customer_name} (Order ID: {new_order.id})") # Debug print
     return {"message": "Order created", "order_id": new_order.id}
 
 
@@ -269,9 +272,7 @@ def delete_order(order_id: int, db: Session = Depends(get_db)):
     return {"message": "Order deleted"}
 
 
-# ============================================
 # ORDER ITEM ROUTES
-# ============================================
 
 @app.post("/order_items")
 def create_order_item(
@@ -320,6 +321,9 @@ def get_all_order_items(db: Session = Depends(get_db)):
     """Get all order items."""
     return db.query(OrderItem).all()
 
+# This allows you to run the server directly with 'python app.py'
+
+
 
 @app.get("/order_items/{item_id}")
 def get_order_item(item_id: int, db: Session = Depends(get_db)):
@@ -328,3 +332,9 @@ def get_order_item(item_id: int, db: Session = Depends(get_db)):
     if not item:
         raise HTTPException(status_code=404, detail="Order item not found")
     return item
+
+# This allows you to run the server directly with 'python app.py'
+if __name__ == "__main__":
+    import uvicorn
+    print("Starting Haze Online Backend...")
+    uvicorn.run(app, host="127.0.0.1", port=8000)

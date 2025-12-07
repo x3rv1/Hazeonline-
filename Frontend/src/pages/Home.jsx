@@ -120,41 +120,43 @@ function Home() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {newProducts.map((product) => (
-              <div key={product.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 hover:shadow-lg">
-                <div className="aspect-video bg-gray-100 rounded-lg mb-4 overflow-hidden flex items-center justify-center">
-                  {product.image_url ? (
-                    <img
-                      src={product.image_url}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
-                      <Package className="h-12 w-12 text-gray-400" />
-                    </div>
-                  )}
-                  {/* Fallback for error state */}
-                  {product.image_url && <div className="hidden w-full h-full items-center justify-center bg-gray-100 absolute top-0 left-0"><Package className="h-12 w-12 text-gray-400" /></div>}
+              <Link key={product.id} to={`/products/${product.id}`} className="block">
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700 transition-colors duration-300 hover:shadow-lg h-full">
+                  <div className="aspect-video bg-gray-100 rounded-lg mb-4 overflow-hidden flex items-center justify-center">
+                    {product.image_url ? (
+                      <img
+                        src={product.image_url}
+                        alt={product.name}
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+                        <Package className="h-12 w-12 text-gray-400" />
+                      </div>
+                    )}
+                    {/* Fallback for error state */}
+                    {product.image_url && <div className="hidden w-full h-full items-center justify-center bg-gray-100 absolute top-0 left-0"><Package className="h-12 w-12 text-gray-400" /></div>}
+                  </div>
+                  <h3 className="font-semibold text-lg">{product.name}</h3>
+                  <p className="text-gray-600 text-sm mt-1 line-clamp-2">
+                    {product.description || "No description"}
+                  </p>
+                  <div className="flex justify-between items-center mt-4">
+                    <span className="text-xl font-bold text-blue-600">
+                      KSh {product.price?.toLocaleString()}
+                    </span>
+                    <span className={`text-xs px-2 py-1 rounded ${
+                      product.stock > 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                    }`}>
+                      {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
+                    </span>
+                  </div>
                 </div>
-                <h3 className="font-semibold text-lg">{product.name}</h3>
-                <p className="text-gray-600 text-sm mt-1 line-clamp-2">
-                  {product.description || "No description"}
-                </p>
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-xl font-bold text-blue-600">
-                    KSh {product.price?.toLocaleString()}
-                  </span>
-                  <span className={`text-xs px-2 py-1 rounded ${
-                    product.stock > 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-                  }`}>
-                    {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
-                  </span>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

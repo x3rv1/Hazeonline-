@@ -6,20 +6,22 @@ import { apiPost, apiGet } from "../api/client.js";
 import { ShoppingCart, Trash2, Plus, Minus, CheckCircle } from "lucide-react";
 
 function Cart() {
-  const [cartItems, setCartItems] = useState([]);
+  /* 
+    Initialize cart from localStorage directly to avoid race conditions 
+    where an empty state overwrites the stored data on mount.
+  */
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem("hazeCart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  
   const [customerName, setCustomerName] = useState("");
   const [loading, setLoading] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [products, setProducts] = useState([]);
 
-  // Load cart from localStorage
+  // Fetch products to add to cart
   useEffect(() => {
-    const savedCart = localStorage.getItem("hazeCart");
-    if (savedCart) {
-      setCartItems(JSON.parse(savedCart));
-    }
-    
-    // Fetch products to add to cart
     async function fetchProducts() {
       const data = await apiGet("/products");
       setProducts(data);
