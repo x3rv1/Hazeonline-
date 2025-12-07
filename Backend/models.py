@@ -31,7 +31,7 @@ class Product(Base):
     description = Column(Text)                         # Product description
     price = Column(Float, nullable=False)              # Product price
     stock = Column(Integer, default=0)                 # Available stock count
-    image_url = Column(Text)                           # ✅ Optional: link to product image
+    image_url = Column(Text)                          
     created_at = Column(DateTime, default=datetime.now) # Timestamp when product was created
 
     # Foreign key: Product belongs to a category
